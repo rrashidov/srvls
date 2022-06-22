@@ -21,3 +21,16 @@ The platform will provide the following features:
 - function execution
     - trigger a function execution
     - list/get a function execution
+
+## REST API
+
+| Method | URL                                                             | Description                    |
+| -------| ----------------------------------------------------------------| -------------------------------|
+| GET    | /api/v1/:tenant/functions                                       | List functions                 |
+| GET    | /api/v1/:tenant/functions/:function_id                          | Get function details           |
+| POST   | /api/v1/:tenant/functions                                       | Create new function            |
+| PUT    | /api/v1/:tenant/functions/:function_id                          | Update an existing function    |
+| DELETE | /api/v1/:tenant/functions/:function_id                          | Delete an existing function    |
+| GET    | /api/v1/:tenant/functions/:function_id/executions               | List function executions       |
+| GET    | /api/v1/:tenant/functions/:function_id/executions/:execution_id | Get function execution details |
+| POST   | /api/v1/:tenant/functions/:function_id/executions               | Trigger function execution     |
