@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import "net/http"
+
+type application struct {
+}
 
 func main() {
-	fmt.Println("Hello world from API component")
+	app := &application{}
+
+	srv := &http.Server{
+		Handler: app.routes(),
+	}
+
+	srv.ListenAndServe()
 }
