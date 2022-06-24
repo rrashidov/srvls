@@ -16,3 +16,6 @@
 
 # Output folder for build commands
 bin/
+
+# VS Code folder
+.vscode/
