@@ -56,3 +56,9 @@ The platform will provide the following features:
 
 - the platform will initially work only with mysql db;
 - the platform will initially work only with k8s as an execution runtime;
+
+## Development
+
+The platform could be tested locally. In order to run and test it locally, the following dependencies have to be present:
+
+- MySQL server
