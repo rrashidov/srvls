@@ -34,3 +34,20 @@ The platform will provide the following features:
 | GET    | /api/v1/:tenant/functions/:function_id/executions               | List function executions       |
 | GET    | /api/v1/:tenant/functions/:function_id/executions/:execution_id | Get function execution details |
 | POST   | /api/v1/:tenant/functions/:function_id/executions               | Trigger function execution     |
+
+## Data model 
+
+- tenant
+  - id
+  - name
+  - description
+  - function
+    - id
+    - name
+    - description
+    - container image
+    - function execution
+      - date time triggered
+      - date time started
+      - date time finished
+      - status
