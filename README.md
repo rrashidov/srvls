@@ -51,3 +51,8 @@ The platform will provide the following features:
       - date time started
       - date time finished
       - status
+
+## Boundary conditions
+
+- the platform will initially work only with mysql db;
+- the platform will initially work only with k8s as an execution runtime;
