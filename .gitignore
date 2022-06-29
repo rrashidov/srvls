@@ -19,3 +19,6 @@ bin/
 
 # VS Code folder
 .vscode/
+
+# TODO file used to keep track of what has to be done
+TODO.md
