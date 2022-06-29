@@ -62,3 +62,4 @@ The platform will provide the following features:
 The platform could be tested locally. In order to run and test it locally, the following dependencies have to be present:
 
 - MySQL server
+- [golang-migrate](https://github.com/golang-migrate/migrate)
