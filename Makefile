@@ -43,3 +43,10 @@ setup-test-mysql:
 	@echo 'New MySQL container started. Create tables'
 	@migrate -path=./migrations -database="mysql://${mysql_user}:${mysql_password}@tcp(127.0.0.1:${mysql_port})/${mysql_db_name}" up
 	@echo 'Tables created. DB is ready for testing'
+
+## clean: cleans all the artifacts (containers, binaries, etc) created in the context of local testing
+.PHONY: clean
+clean:
+	@echo 'Cleaning up test MySQL instance'
+	@docker stop ${mysql_container_name} || true && docker rm ${mysql_container_name} || true
+	@echo 'Test MySQL instance cleaned'
