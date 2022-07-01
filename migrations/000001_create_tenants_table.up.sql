@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS tenants (
+    `id` VARCHAR(50) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    `description` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`)
+)  ENGINE=INNODB;
