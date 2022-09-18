@@ -6,13 +6,17 @@ import (
 )
 
 type App interface {
-	CreateTenant(tenant model.Tenant) error
+	CreateTenant(id, name string) error
 }
 
 type Application struct {
 	p pers.Persistence
 }
 
-func (app Application) CreateTenant(tenant *model.Tenant) error {
-	return app.p.SaveTenant(tenant)
+func (app Application) CreateTenant(id, name string) error {
+	t := &model.Tenant{
+		ID:   id,
+		Name: name,
+	}
+	return app.p.SaveTenant(t)
 }
