@@ -29,7 +29,7 @@ func TestCreateTenant(t *testing.T) {
 	tenant_exists := in_mem_pers.TenantExists(test_tenant_id)
 
 	if !tenant_exists {
-		t.Error("Created tenant not found in persistence")
+		t.Errorf("Created tenant %s not found in persistence", test_tenant_id)
 	}
 }
 
