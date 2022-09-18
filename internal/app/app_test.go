@@ -10,6 +10,12 @@ import (
 const (
 	TestTenantID   string = "test-tenant-id"
 	TestTenantName string = "test-tenant-name"
+
+	NonExistinTenantID string = "non-existing=tenant"
+
+	TestFunctionID             string = "test-function-id"
+	TestFunctionName           string = "test-function-name"
+	TestFunctionContainerImage string = "test-function-container-image"
 )
 
 func TestCreateTenant(t *testing.T) {
@@ -28,6 +34,38 @@ func TestCreateTenant(t *testing.T) {
 
 	if !tenantExists {
 		t.Errorf("Created tenant %s not found in persistence", TestTenantID)
+	}
+}
+
+func TestCreateFunction(t *testing.T) {
+	inMemPers := createPersistence()
+
+	app := createTestApp(inMemPers)
+
+	app.CreateTenant(TestTenantID, TestTenantName)
+
+	err := app.CreateFunction(TestTenantID, TestFunctionID, TestFunctionName, TestFunctionContainerImage)
+
+	if err != nil {
+		t.Errorf("Problem creating function: %s", err)
+	}
+
+	functionExists := inMemPers.FunctionExists(TestTenantID, TestFunctionID)
+
+	if !functionExists {
+		t.Errorf("Function not saved in persistence layer")
+	}
+}
+
+func TestCreateFunctionInNonExistingTenant(t *testing.T) {
+	inMemPers := createPersistence()
+
+	app := createTestApp(inMemPers)
+
+	err := app.CreateFunction(NonExistinTenantID, TestFunctionID, TestFunctionName, TestFunctionContainerImage)
+
+	if err == nil {
+		t.Errorf("Creating function in non-existing tenant should fail: %s", NonExistinTenantID)
 	}
 }
 

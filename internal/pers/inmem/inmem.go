@@ -1,6 +1,14 @@
 package inmem
 
-import "github.com/rrashidov/srvls/internal/model"
+import (
+	"errors"
+
+	"github.com/rrashidov/srvls/internal/model"
+)
+
+var (
+	ErrTenantNotFound error = errors.New("TenantNotFoundError")
+)
 
 type InMemoryPersistence struct {
 	tenants []*model.Tenant
@@ -11,6 +19,19 @@ func (p *InMemoryPersistence) SaveTenant(tenant *model.Tenant) error {
 	return nil
 }
 
+func (p *InMemoryPersistence) GetTenant(id string) (*model.Tenant, error) {
+	for _, tenant := range p.tenants {
+		if tenant.ID == id {
+			return tenant, nil
+		}
+	}
+	return nil, ErrTenantNotFound
+}
+
+func (p *InMemoryPersistence) SaveFunction(function *model.Function) error {
+	return nil
+}
+
 func (p *InMemoryPersistence) TenantExists(id string) bool {
 	for _, tenant := range p.tenants {
 		if tenant.ID == id {
@@ -18,4 +39,8 @@ func (p *InMemoryPersistence) TenantExists(id string) bool {
 		}
 	}
 	return false
+}
+
+func (p *InMemoryPersistence) FunctionExists(tenantId, functionId string) bool {
+	return true
 }
