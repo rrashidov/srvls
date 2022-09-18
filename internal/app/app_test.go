@@ -9,16 +9,16 @@ import (
 )
 
 const (
-	test_tenant_id string = "test-tenant-id"
+	TestTenantID string = "test-tenant-id"
 )
 
 func TestCreateTenant(t *testing.T) {
 
-	in_mem_pers := create_persistence()
+	inMemPers := createPersistence()
 
-	app := create_test_app(in_mem_pers)
+	app := createTestApp(inMemPers)
 
-	tenant := create_test_tenant()
+	tenant := createTestTenant()
 
 	err := app.CreateTenant(tenant)
 
@@ -26,26 +26,26 @@ func TestCreateTenant(t *testing.T) {
 		t.Error("Problem creating tenant", err)
 	}
 
-	tenant_exists := in_mem_pers.TenantExists(test_tenant_id)
+	tenantExists := inMemPers.TenantExists(TestTenantID)
 
-	if !tenant_exists {
-		t.Errorf("Created tenant %s not found in persistence", test_tenant_id)
+	if !tenantExists {
+		t.Errorf("Created tenant %s not found in persistence", TestTenantID)
 	}
 }
 
-func create_test_app(p pers.Persistence) *Application {
+func createTestApp(p pers.Persistence) *Application {
 	return &Application{
 		p: p,
 	}
 }
 
-func create_test_tenant() *model.Tenant {
+func createTestTenant() *model.Tenant {
 	return &model.Tenant{
-		ID:   test_tenant_id,
+		ID:   TestTenantID,
 		Name: "test-name",
 	}
 }
 
-func create_persistence() *inmem.InMemoryPersistence {
+func createPersistence() *inmem.InMemoryPersistence {
 	return &inmem.InMemoryPersistence{}
 }
