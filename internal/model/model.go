@@ -17,6 +17,7 @@ type Function struct {
 type FunctionExecution struct {
 	ID       string
 	Function Function
+	Status   string
 	Started  time.Time
 	Ended    time.Time
 }

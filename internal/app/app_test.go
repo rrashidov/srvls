@@ -69,6 +69,22 @@ func TestCreateFunctionInNonExistingTenant(t *testing.T) {
 	}
 }
 
+func TestTriggerFunctionExecutionHappyPath(t *testing.T) {
+	inMemPers := createPersistence()
+
+	app := createTestApp(inMemPers)
+
+	funcExecId, err := app.TriggerFunction(TestTenantID, TestFunctionID)
+
+	if err != nil {
+		t.Errorf("Problem triggering function execution: %v", err.Error())
+	}
+
+	if len(funcExecId) == 0 {
+		t.Errorf("Triggering function execution did not return execution id")
+	}
+}
+
 func createTestApp(p pers.Persistence) *Application {
 	return &Application{
 		p: p,

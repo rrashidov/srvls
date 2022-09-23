@@ -8,13 +8,14 @@ import (
 type App interface {
 	CreateTenant(id, name string) error
 	CreateFunction(tenantId, id, name, containerImage string) error
+	TriggerFunction(tenantId, functionId string) (string, error)
 }
 
 type Application struct {
 	p pers.Persistence
 }
 
-func (app Application) CreateTenant(id, name string) error {
+func (app *Application) CreateTenant(id, name string) error {
 	t := &model.Tenant{
 		ID:   id,
 		Name: name,
@@ -22,7 +23,7 @@ func (app Application) CreateTenant(id, name string) error {
 	return app.p.SaveTenant(t)
 }
 
-func (app Application) CreateFunction(tenantId, id, name, containerImager string) error {
+func (app *Application) CreateFunction(tenantId, id, name, containerImager string) error {
 	tenant, err := app.p.GetTenant(tenantId)
 
 	if err != nil {
@@ -37,4 +38,8 @@ func (app Application) CreateFunction(tenantId, id, name, containerImager string
 	}
 
 	return app.p.SaveFunction(function)
+}
+
+func (app *Application) TriggerFunction(tenantId, functionId string) (string, error) {
+	return "testId", nil
 }
