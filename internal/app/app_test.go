@@ -16,6 +16,8 @@ const (
 	TestFunctionID             string = "test-function-id"
 	TestFunctionName           string = "test-function-name"
 	TestFunctionContainerImage string = "test-function-container-image"
+
+	NonExistingFunctionId string = "non-existing-function-id"
 )
 
 func TestCreateTenant(t *testing.T) {
@@ -104,6 +106,20 @@ func TestTriggerFunctionInNonExistingTenant(t *testing.T) {
 
 	if err == nil {
 		t.Errorf("Triggering function in non existing tenant should fail")
+	}
+}
+
+func TestTriggerFunctionNonExistingFunction(t *testing.T) {
+	inMemPers := createPersistence()
+
+	app := createTestApp(inMemPers)
+
+	app.CreateTenant(TestTenantID, TestTenantName)
+
+	_, err := app.TriggerFunction(TestTenantID, NonExistingFunctionId)
+
+	if err == nil {
+		t.Errorf("Triggering non existing function should fail")
 	}
 }
 

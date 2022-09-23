@@ -47,5 +47,11 @@ func (app *Application) TriggerFunction(tenantId, functionId string) (string, er
 		return "", err
 	}
 
+	_, err = app.p.GetFunction(tenantId, functionId)
+
+	if err != nil {
+		return "", err
+	}
+
 	return "testId", nil
 }
