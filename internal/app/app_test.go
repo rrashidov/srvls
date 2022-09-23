@@ -83,6 +83,12 @@ func TestTriggerFunctionExecutionHappyPath(t *testing.T) {
 	if len(funcExecId) == 0 {
 		t.Errorf("Triggering function execution did not return execution id")
 	}
+
+	funcExecExists := inMemPers.FuncExecExists(funcExecId)
+
+	if !funcExecExists {
+		t.Errorf("Triggering function execution should persist functionExecution model entity")
+	}
 }
 
 func createTestApp(p pers.Persistence) *Application {

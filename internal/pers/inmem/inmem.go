@@ -44,3 +44,11 @@ func (p *InMemoryPersistence) TenantExists(id string) bool {
 func (p *InMemoryPersistence) FunctionExists(tenantId, functionId string) bool {
 	return true
 }
+
+func (p *InMemoryPersistence) SaveFunctionExecution(funcExec *model.FunctionExecution) error {
+	return nil
+}
+
+func (p *InMemoryPersistence) FuncExecExists(id string) bool {
+	return true
+}
