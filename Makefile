@@ -38,5 +38,5 @@ vendor:
 .PHONY: build
 build: audit
 	@echo 'Building cmd/srvls...'
-	go build -o=./bin/srvls ./cmd/srvls
+	go build ./cmd/srvls
 	@echo '[OK] Everything is fine so far'
