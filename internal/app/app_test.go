@@ -74,6 +74,10 @@ func TestTriggerFunctionExecutionHappyPath(t *testing.T) {
 
 	app := createTestApp(inMemPers)
 
+	app.CreateTenant(TestTenantID, TestTenantName)
+
+	app.CreateFunction(TestTenantID, TestFunctionID, TestFunctionName, TestFunctionContainerImage)
+
 	funcExecId, err := app.TriggerFunction(TestTenantID, TestFunctionID)
 
 	if err != nil {
@@ -88,6 +92,18 @@ func TestTriggerFunctionExecutionHappyPath(t *testing.T) {
 
 	if !funcExecExists {
 		t.Errorf("Triggering function execution should persist functionExecution model entity")
+	}
+}
+
+func TestTriggerFunctionInNonExistingTenant(t *testing.T) {
+	inMemPers := createPersistence()
+
+	app := createTestApp(inMemPers)
+
+	_, err := app.TriggerFunction(NonExistinTenantID, TestFunctionID)
+
+	if err == nil {
+		t.Errorf("Triggering function in non existing tenant should fail")
 	}
 }
 

@@ -41,5 +41,11 @@ func (app *Application) CreateFunction(tenantId, id, name, containerImager strin
 }
 
 func (app *Application) TriggerFunction(tenantId, functionId string) (string, error) {
+	_, err := app.p.GetTenant(tenantId)
+
+	if err != nil {
+		return "", err
+	}
+
 	return "testId", nil
 }
