@@ -31,6 +31,7 @@ func (p *InMemoryPersistence) GetTenant(id string) (*model.Tenant, error) {
 }
 
 func (p *InMemoryPersistence) SaveFunction(function *model.Function) error {
+	p.functions = append(p.functions, function)
 	return nil
 }
 
