@@ -7,11 +7,13 @@ import (
 )
 
 var (
-	ErrTenantNotFound error = errors.New("TenantNotFoundError")
+	ErrTenantNotFound   error = errors.New("TenantNotFoundError")
+	ErrFunctionNotFound error = errors.New("FunctionNotFoundError")
 )
 
 type InMemoryPersistence struct {
-	tenants []*model.Tenant
+	tenants   []*model.Tenant
+	functions []*model.Function
 }
 
 func (p *InMemoryPersistence) SaveTenant(tenant *model.Tenant) error {
@@ -30,6 +32,15 @@ func (p *InMemoryPersistence) GetTenant(id string) (*model.Tenant, error) {
 
 func (p *InMemoryPersistence) SaveFunction(function *model.Function) error {
 	return nil
+}
+
+func (p *InMemoryPersistence) GetFunction(tenantId, id string) (*model.Function, error) {
+	for _, function := range p.functions {
+		if function.Tenant.ID == tenantId && function.ID == id {
+			return function, nil
+		}
+	}
+	return nil, ErrFunctionNotFound
 }
 
 func (p *InMemoryPersistence) TenantExists(id string) bool {
