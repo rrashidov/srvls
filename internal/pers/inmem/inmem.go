@@ -44,15 +44,6 @@ func (p *InMemoryPersistence) GetFunction(tenantId, id string) (*model.Function,
 	return nil, ErrFunctionNotFound
 }
 
-func (p *InMemoryPersistence) TenantExists(id string) bool {
-	for _, tenant := range p.tenants {
-		if tenant.ID == id {
-			return true
-		}
-	}
-	return false
-}
-
 func (p *InMemoryPersistence) FunctionExists(tenantId, functionId string) bool {
 	return true
 }

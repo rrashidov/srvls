@@ -32,10 +32,10 @@ func TestCreateTenant(t *testing.T) {
 		t.Error("Problem creating tenant", err)
 	}
 
-	tenantExists := inMemPers.TenantExists(TestTenantID)
+	_, err = inMemPers.GetTenant(TestTenantID)
 
-	if !tenantExists {
-		t.Errorf("Created tenant %s not found in persistence", TestTenantID)
+	if err != nil {
+		t.Errorf("Created tenant %s not found in persistence: %v", TestTenantID, err.Error())
 	}
 }
 
